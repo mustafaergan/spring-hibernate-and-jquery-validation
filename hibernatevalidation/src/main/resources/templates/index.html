@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1"/>
+<title>Insert title here</title>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.17.0/dist/jquery.validate.js"></script>
+</head>
+<body>
+
+<script>
+	jQuery.validator.addMethod("alphanumericRegex", function(value, element) {
+	    return this.optional( element ) || /^[a-zA-Z0-9,.(._)]*$/.test( value );
+	}, 
+	'Sadece Alphanumeric Değerler');
+	
+	jQuery.validator.addClassRules("valRequired", {
+	      required: true,
+	      minlength: 2
+	});
+	
+	jQuery.validator.addClassRules("valPasswordRegex", {
+	      passwordRegex: true,
+	});
+	
+	jQuery.validator.addClassRules("valAlphanumericRegex", {
+	      alphanumericRegex: true,
+	});
+	
+	jQuery.validator.addClassRules("valSize2-50", {
+	        minlength: 2,
+	        maxlength: 50
+	});
+	
+	jQuery.validator.addClassRules("valSize4-50", {
+	        minlength: 4,
+	        maxlength: 50
+	});
+	
+	jQuery.validator.addClassRules("valSize6-20", {
+	        minlength: 6,
+	        maxlength: 20
+	});
+	
+	jQuery.validator.addClassRules("valMail", {
+	        email:true,
+	});
+	
+	
+	jQuery.extend(jQuery.validator.messages, {
+	    required: "required",
+	    remote: "Please fix this field." ,
+	    email:  '<spring:message code="validation.email"/>',
+	    url: "Please enter a valid URL.",
+	    date: "Please enter a valid date.",
+	    dateISO: "Please enter a valid date (ISO).",
+	    number: "Please enter a valid number.",
+	    digits: "Please enter only digits.",
+	    creditcard: "Please enter a valid credit card number.",
+	    equalTo: "Please enter the same value again.",
+	    accept: "Please enter a value with a valid extension.",
+	    maxlength: jQuery.validator.format('maxlength'),
+	    minlength: jQuery.validator.format('minlength') ,
+	    rangelength: jQuery.validator.format('rangelength') ,
+	    range: jQuery.validator.format('range') ,
+	    max: jQuery.validator.format("Please enter a value less than or equal to {0}."),
+	    min: jQuery.validator.format("Please enter a value greater than or equal to {0}.")
+	});
+	
+	$( "#inputForm" ).validate({
+	    rules:{
+	       passwordCf:{
+	           equalTo: "#password",
+	       }
+	 }});
+
+</script>
+
+
+ <form id = "inputForm" >
+           <div>
+               <input class="valAlphanumericRegex valRequired valSize4-50" name="username"/>
+           </div>
+           
+           <div>
+               <input class="valMail valSize4-50" name="mail"/>
+           </div>
+           
+           <div>
+               <input class="valAlphanumericRegex valRequired valSize4-50" name="name"/>
+           </div>           
+           
+           <div>
+               <input class="valAlphanumericRegex valRequired valSize4-50" name="username"/>
+           </div>
+           
+            <div>
+               <input class="valSize6-20" name="password"/>
+           </div>
+                     
+            <div>
+               <input class="valSize6-20" name="passwordCf"/>
+           </div>
+                                
+    </form>
+
+
+</body>
+</html>
